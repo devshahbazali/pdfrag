@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     CHUNK_SIZE:int=800
     CHUNK_OVERLAP:int= 150
     TOP_K:int=5
-    PDF_PATH:Path=Path(__file__).resolve()  /"data" / "pdf"
-    CHROMA_PATH:Path=Path(__file__).resolve()  /"data" / "chroma"
+    PDF_PATH:Path=Path(__file__).resolve().parents[2] / "data" / "pdfs"
+    CHROMA_PATH:Path=Path(__file__).resolve().parents[2]  /"data" / "chroma"
 
 settings=Settings()
