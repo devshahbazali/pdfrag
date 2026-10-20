@@ -1,6 +1,6 @@
 from pydantic import BaseModel,Field
 
-class chunk(BaseModel):
+class Chunk(BaseModel):
     #A chucnk of text ready to be embedded
 
     text:str=Field(...,description="chuck of the document text")
