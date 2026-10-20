@@ -53,6 +53,9 @@ def _recursive_splitter(text:str,saparators:list[str],chunk_size:int)->list[str]
     if buffer:
         chunks.append(buffer)
     return chunks
+
+
+
 def split_text(text:str,
              chunk_size:int|None=None,
              chunk_overlap:int |None=None) -> list[str]:
@@ -73,7 +76,10 @@ def split_text(text:str,
     overlapped_chunks:list[str]= [raw_chunks[0]]
 
     for i in range(1,len(raw_chunks)):
+       
         tail_of_prev_chunk=raw_chunks[i-1][-chunk_overlap:]
+        #appending the white space at the end so that next chunk first world dont stick to tails last word
+        tail_of_prev_chunk +=" "
         overlapped_chunks.append(tail_of_prev_chunk+raw_chunks[i])
     
     return overlapped_chunks
