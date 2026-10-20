@@ -53,7 +53,7 @@ def _recursive_splitter(text:str,saparators:list[str],chunk_size:int)->list[str]
     if buffer:
         chunks.append(buffer)
     return chunks
-def splitter(text:str,
+def split_text(text:str,
              chunk_size:int|None=None,
              chunk_overlap:int |None=None) -> list[str]:
 
