@@ -7,7 +7,9 @@ authors = [
     { name = "Shahbaz Ali", email = "devshahbazali@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "sentence-transformers>=6.1.0",
+]
 
 [project.scripts]
 pdfrag = "pdfrag:main"
