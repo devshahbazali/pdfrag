@@ -11,7 +11,7 @@ wheels/
 .venv
 .env
 .env.example
-data/pdf/*
+data/pdfs/*
 data/chroma/*
 !data/pdfs/.gitkeep
 !data/chroma/.gitkeep
