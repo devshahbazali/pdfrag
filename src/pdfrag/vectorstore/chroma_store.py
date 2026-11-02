@@ -24,7 +24,7 @@ class ChromaStore:
 
     def reset(self)->None:
         self.client.delete_collection(COLLECTION_NAME)
-        self.collection=self.client.get_or_create_collection(name=COLLECTION_NAME,settings=ChromaSettings)
+        self.collection=self.client.get_or_create_collection(name=COLLECTION_NAME,metadata=METADATA)
 
     def addChunks(self,chunks:list[Chunk],embeddings:list[list[float]])->None:
         "add chunks and there respective embeddings to the chroma db"
