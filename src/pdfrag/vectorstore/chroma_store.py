@@ -2,13 +2,24 @@ from pathlib import Path
 from typing import Any
 import chromadb 
 from chromadb.config import Settings as ChromaSettings
-
+from dataclasses import dataclass
 from pdfrag.chunking.models import Chunk
 from pdfrag.config import settings
 
 COLLECTION_NAME="ragpdf"
 
 METADATA={"hnsw:space":"cosine"}
+
+
+@dataclass 
+class Hit:
+    "data class for result returned by the db, metadata is dict with keys source,page, chunk_index,total_pages" 
+
+    id:str
+    text:str
+    metadata:list[dict[str,Any]]
+    distance:float
+    rerank_score:float = None #to store the hit reanrak score from cross encoding
 
 class ChromaStore:
     def __init__(self,persist_dir:Path|None=None)->None:
@@ -41,17 +52,15 @@ class ChromaStore:
                             embeddings=embeddings)
 
         
-    def query(self,query_embedding:list[float],top_k=5)->list[dict[str,any]]:
+    def query(self,query_embedding:list[float],top_k=5)->Hit:
         "this function will query the database and return top_k answers"
         results=self.collection.query(query_embeddings=query_embedding,n_results=top_k,include=["metadatas","documents","distances"])
-        hits:list[dict[str,Any]]=[]
+        hits:list[Hit]=[]
         for i in range(len(results["ids"][0])):
             hits.append(
-                {
-                    "id":results["ids"][0][i],
-                    "text":results["documents"][0][i],
-                    "metadata":results["metadatas"][0][i],
-                    "distance":results["distances"][0][i],
-                }
-            )
+                Hit(id=results["ids"][0][i],
+                    text=results["documents"][0][i],
+                    metadata=results["metadatas"][0][i],
+                    distance=results["distances"][0][i])
+                    )
         return hits
