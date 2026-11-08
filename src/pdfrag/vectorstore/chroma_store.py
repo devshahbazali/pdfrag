@@ -20,6 +20,9 @@ class Hit:
     metadata:list[dict[str,Any]]
     distance:float
     rerank_score:float = None #to store the hit reanrak score from cross encoding
+    def __repr__(self):
+        print("id# ",self.id,"\n","Text:",self.text[0:20],"...",self.text[-20:])
+
 
 class ChromaStore:
     def __init__(self,persist_dir:Path|None=None)->None:
