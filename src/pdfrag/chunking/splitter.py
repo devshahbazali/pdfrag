@@ -1,5 +1,5 @@
 from pdfrag.config import settings
-DEFGAULT_SAPARATERS=["\n\n","\n", ". ", "! ", "? ", "; ", ", ", " ", ""]
+DEFGAULT_SAPARATERS=["\n\n","\n", ". ", "! ", "? ", "; ", ", ", " ",]
 
 def _recursive_splitter(text:str,saparators:list[str],chunk_size:int)->list[str]:
     #if the text size good then return the text
