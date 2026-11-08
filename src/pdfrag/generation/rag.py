@@ -6,13 +6,15 @@ from pdfrag.generation.prompt import build_messages
 from pdfrag.generation.llm import getllm
 from pdfrag.vectorstore.chroma_store import Hit
 from typing import Any
-
 @dataclass
 class RagAnswer:
     question:str
     answer:str
     hits:Hit
     model:str
+
+  
+    
     
 
 class RagChain:
@@ -26,7 +28,7 @@ class RagChain:
         hits:list[Hit]=store.query(query_embedding=query_embedding,top_k=top_k)
         reranked_hits=rerankResults(query=question,results=hits)
         messages=build_messages(question=question,hits=reranked_hits)
-        answer=self.llm.chat(messages=messages,temprature=0.0)
+        answer=self.llm.chat(messages=messages,temperature=0.0)
         return RagAnswer(
             question=question,
             answer=answer,
