@@ -2,7 +2,7 @@ import ollama
 from typing import Protocol
 from pdfrag.config import settings
 class llmProvider(Protocol):
-    def chat(self,message:list[dict],temprature:float)->str:...
+    def chat(self,message:list[dict],temperature:float)->str:...
 
 class OllamaProvider:
     "provied the ollama client with default settings using env or using parameters "
@@ -12,10 +12,10 @@ class OllamaProvider:
         self.model= model or settings.OLLAMA_MODEL
         self.client=ollama.Client(host=host or settings.OLLAMA_HOST)
 
-    def chat(self,messages:list[dict],temprature:float=0.0):
+    def chat(self,messages:list[dict],temperature:float=0.0):
         response=self.client.chat(model=self.model,
                                   messages=messages,
-                                  options={"temprature":temprature})
+                                  options={"temperature":temperature})
         return response["message"]["content"]
 
     
