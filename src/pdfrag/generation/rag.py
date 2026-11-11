@@ -10,7 +10,7 @@ from typing import Any
 class RagAnswer:
     question:str
     answer:str
-    hits:Hit
+    hits:list[Hit]
     model:str
 
   
