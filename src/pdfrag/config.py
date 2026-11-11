@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL :str ="all-MiniLM-L6-v2"
     CHUNK_SIZE:int=800
     CHUNK_OVERLAP:int= 150
+    LLM_PROVIDER:str="Ollama"
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-4o-mini"
     TOP_K:int=5
     PDF_PATH:Path=Path(__file__).resolve().parents[2] / "data" / "pdfs"
     CHROMA_PATH:Path=Path(__file__).resolve().parents[2]  /"data" / "chroma"
