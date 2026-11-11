@@ -1,5 +1,13 @@
 from pdfrag.config import settings
-DEFGAULT_SAPARATERS=["\n\n","\n", ". ", "! ", "? ", "; ", ", ", " ",]
+from typing import Any
+DEFGAULT_SAPARATERS=["\n\n",
+    "\n",
+    ". ",
+    "? ",
+    "! ",
+    "; ",
+    ", ",
+    " " ]
 
 def _recursive_splitter(text:str,saparators:list[str],chunk_size:int)->list[str]:
     #if the text size good then return the text
@@ -7,7 +15,7 @@ def _recursive_splitter(text:str,saparators:list[str],chunk_size:int)->list[str]
     if len(text)<=chunk_size:
         return [text]
 
-    #if no saparetors are available just devide the part of lenght chunksize
+    #if no saparetors are available just devide the part of lenght chunk size
     if not saparators:
         return [text[i:i+chunk_size]  for i in range(0,len(text),chunk_size) ]
 
@@ -15,7 +23,7 @@ def _recursive_splitter(text:str,saparators:list[str],chunk_size:int)->list[str]
 
     parts=text.split(sep)
     # Re-attach the separator to each part end e.g.(".")(except the last) so we don't lose it
-    pieces = [p + sep for p in parts[:-1]] + [parts[-1]]
+    pieces = [p + sep + " " for p in parts[:-1]] + [parts[-1]]
     chunks: list[str] = []
     buffer = ""
 
